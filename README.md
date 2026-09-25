@@ -4,8 +4,17 @@ Connects Claude Code or Codex to your Ordering project through the Ordering MCP
 server. It includes a skill that knows the platform: order statuses, user
 levels, how to filter and paginate, and which operation answers each question.
 
-Today it reads: orders, businesses, menus, users, reports and the rest of what
-your role can see in the Dashboard. It cannot write yet.
+It reads orders, businesses, menus, users, reports and the rest of what your
+role can see in the Dashboard. With a key that has the `write` scope, it can
+also make a few changes:
+
+- enable, disable or snooze menus, categories, products and options, and
+  change their names and prices;
+- open or close a business, and change its schedule and contact data;
+- change the status of an order;
+- update offers.
+
+It asks before each change. It cannot create or delete anything.
 
 ## Before you start
 
