@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ordering",
+  "version": "0.1.0",
+  "description": "Read your Ordering project (orders, businesses, menus, users, reports) through the Ordering MCP server. The MCP server itself is added once per project with `codex mcp add` (see README): its URL carries the project code and its key comes from an environment variable.",
+  "author": {
+    "name": "Ordering",
+    "url": "https://www.ordering.co"
+  },
+  "homepage": "https://www.ordering.co",
+  "keywords": ["ordering", "mcp", "orders", "restaurants", "delivery"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Ordering",
+        "shortDescription": "Read your Ordering project through its MCP server.",
+        "developerName": "Ordering",
+        "category": "Productivity",
+        "websiteURL": "https://www.ordering.co",
+        "defaultPrompt": "Who am I in Ordering?"
+      }
+    }
+  }
+}

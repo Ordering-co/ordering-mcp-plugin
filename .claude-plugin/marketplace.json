@@ -1,0 +1,15 @@
+{
+  "name": "ordering",
+  "owner": {
+    "name": "Ordering",
+    "url": "https://www.ordering.co"
+  },
+  "description": "Ordering plugins for Claude Code.",
+  "plugins": [
+    {
+      "name": "ordering",
+      "source": "./plugins/ordering",
+      "description": "Connect Claude Code to your Ordering project through the Ordering MCP server, with a skill that knows the platform."
+    }
+  ]
+}
