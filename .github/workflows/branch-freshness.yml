@@ -1,0 +1,39 @@
+name: Branch freshness
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  branch-freshness:
+    name: Branch freshness
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify pull request branch includes its target branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          REPOSITORY: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" != "pull_request" ]]; then
+            echo "Branch freshness is enforced for pull requests."
+            exit 0
+          fi
+          encoded_base=$(jq -rn --arg value "$BASE_BRANCH" '$value | @uri')
+          target_commits_missing=$(gh api "repos/$REPOSITORY/compare/$HEAD_SHA...$encoded_base" --jq '.ahead_by')
+          if [[ "$target_commits_missing" -gt 0 ]]; then
+            echo "::error::Update this pull request branch with $BASE_BRANCH before merging."
+            exit 1
+          fi
+          echo "The pull request branch includes the latest target branch commits."
