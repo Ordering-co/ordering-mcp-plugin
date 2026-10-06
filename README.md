@@ -32,11 +32,15 @@ You need:
 The key gives the AI client the same read access you have in the Dashboard.
 Treat it like a password.
 
+## Marketplace name
+
+The marketplace is called `ordering-dev`, so the plugin id is `ordering@ordering-dev`. It used to be `ordering`, which collided with Ordering's private internal marketplace on team machines. If you installed `ordering@ordering` from this repo before 0.3.0, remove that marketplace and add this one again.
+
 ## Claude Code
 
 ```text
 /plugin marketplace add Finitless-com/ordering-mcp-plugin
-/plugin install ordering@ordering
+/plugin install ordering@ordering-dev
 ```
 
 When the plugin is enabled, Claude Code asks for the project code and the MCP
@@ -46,7 +50,7 @@ From the command line instead:
 
 ```bash
 claude plugin marketplace add Finitless-com/ordering-mcp-plugin
-claude plugin install ordering@ordering --config project=myrestaurant --config mcp_key=ord_mcp_...
+claude plugin install ordering@ordering-dev --config project=myrestaurant --config mcp_key=ord_mcp_...
 ```
 
 The CLI does not prompt, which is why the values go in `--config`. That leaves
@@ -55,8 +59,8 @@ the key in your shell history, so prefer the `/plugin` flow.
 Then ask: **"Who am I in Ordering?"** and **"List the last 5 orders"**.
 
 - **Updates.** Third-party marketplaces do not update by themselves. Run
-  `/plugin marketplace update ordering`, or turn on auto-update in
-  `/plugin` → Marketplaces → ordering.
+  `/plugin marketplace update ordering-dev`, or turn on auto-update in
+  `/plugin` → Marketplaces → ordering-dev.
 - **A new key.** Update the plugin's `mcp_key` in `/plugin`.
 - **Another project.** Update its `project`.
 
