@@ -1,7 +1,7 @@
 {
   "name": "ordering",
   "displayName": "Ordering",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Read your Ordering project (orders, businesses, menus, users, reports) from Claude Code through the Ordering MCP server.",
   "author": {
     "name": "Ordering",

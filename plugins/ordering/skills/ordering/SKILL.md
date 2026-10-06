@@ -32,6 +32,19 @@ The server fills the API version, the language, the project and the
 `backoffice` segment itself. Never pass them. Pass only the params that
 `describe_operation` lists: unknown params are rejected.
 
+## When the user just connected or asks what they can do
+
+Right after `whoami` on the first interaction, or when asked "what can I do?",
+reply in the user's language with a short, ready-to-copy menu, not a wall of
+text. Always offer reads: today's orders by status; the last 5 orders with
+customer, business and total; which businesses are open now; this week's
+best-selling products; yesterday's sales summary. Only if `whoami` shows a
+`write` scope, also offer: change an order's status; close/reopen a business
+for today; snooze a product until tomorrow; change a product's price, and say
+it always asks before making a change. Close by offering to run one right
+away. Show this menu only on that first turn or when asked; never repeat it
+every turn.
+
 ## Changing data
 
 Only these updates are available, and only with a key that has the `write`
