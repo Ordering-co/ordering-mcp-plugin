@@ -158,5 +158,9 @@ times, check the business `timezone`.
 - If a call fails, read the error: a pattern mismatch means a wrong path param,
   "Unknown query param" lists the valid ones, and an API rejection usually means
   the user's role does not allow it.
-- An expired key says so: tell the user to create a new one in the Ordering
-  Dashboard, on the MCP page.
+- An expired key says so. If the user set things up with the Ordering
+  developer quickstart (`~/ordering-dev-quickstart` exists), renew it with
+  `~/ordering-dev-quickstart/ordering login`: they sign in in the browser and
+  the new key is saved without copying it. Otherwise, tell them to create a
+  new one in the Ordering Dashboard, on the MCP page. Never ask for the key in
+  the chat.
