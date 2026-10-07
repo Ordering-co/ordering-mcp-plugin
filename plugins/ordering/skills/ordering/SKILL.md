@@ -177,3 +177,32 @@ times, check the business `timezone`.
   the new key is saved without copying it. Otherwise, tell them to create a
   new one in the Ordering Dashboard, on the MCP page. Never ask for the key in
   the chat.
+
+## When the MCP can't do it: the REST API
+
+If an operation isn't available through the MCP (`search_operations` doesn't
+find it, it's excluded from this server, or it's a write the MCP doesn't
+allow), check whether the user connected the REST API through the developer
+quickstart: `grep -c '^ORDERING_API_KEY=.\+' ~/ordering-dev-quickstart/.env`
+returns `1` if a key is set. Never read or print that file.
+
+If it's connected, use `~/ordering-dev-quickstart/ordering api METHOD PATH
+[JSON]`. Find the right operation first, never guess an endpoint: run
+`~/ordering-dev-quickstart/ordering spec` once, then query
+`~/ordering-dev-quickstart/spec/openapi.json` with `jq` for the
+`operationId`, path, method, parameters and security.
+
+- A `GET` can run directly.
+- For any `POST`, `PUT`, `PATCH` or `DELETE`: show the user the exact method,
+  path, a summary of the body, the project, and the impact of the change, and
+  wait for an explicit "yes" in the chat before running it. One approval
+  covers exactly one request; run it with `--yes`.
+- Never call the API with `curl` and the raw key, and never read or print the
+  key or the `.env` file.
+
+If the REST API isn't connected, explain that the user can connect it by
+running `~/ordering-dev-quickstart/ordering reset` and choosing "Also give my
+agent the REST API" on the page it opens, or by doing the equivalent in the
+Dashboard. Mention that REST API keys currently have full access to the
+project and don't expire, so the user should treat connecting one as a
+bigger step than an MCP key.
