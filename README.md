@@ -16,6 +16,11 @@ also make a few changes:
 
 It asks before each change. It cannot create or delete anything.
 
+If the user also connected the REST API through the Ordering developer
+quickstart, the skill hands off to it for anything the MCP can't do, finding
+the right endpoint from the OpenAPI spec and asking for approval before any
+write.
+
 ## Before you start
 
 You need:

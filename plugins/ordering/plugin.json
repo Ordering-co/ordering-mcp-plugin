@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ordering",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Read your Ordering project (orders, businesses, menus, users, reports) through the Ordering MCP server. The MCP server itself is added once per project with `codex mcp add` (see README): its URL carries the project code and its key comes from an environment variable.",
   "author": {
     "name": "Ordering",
