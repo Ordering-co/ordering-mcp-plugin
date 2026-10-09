@@ -1,14 +1,20 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ordering",
-  "version": "0.4.0",
-  "description": "Read your Ordering project (orders, businesses, menus, users, reports) through the Ordering MCP server. The MCP server itself is added once per project with `codex mcp add` (see README): its URL carries the project code and its key comes from an environment variable.",
+  "version": "0.5.0",
+  "description": "Ordering.co platform skill. Connect MCP separately with ordering-dev-quickstart; this plugin never requests credentials or registers a second server.",
   "author": {
     "name": "Ordering",
     "url": "https://www.ordering.co"
   },
   "homepage": "https://www.ordering.co",
-  "keywords": ["ordering", "mcp", "orders", "restaurants", "delivery"],
+  "keywords": [
+    "ordering",
+    "mcp",
+    "orders",
+    "restaurants",
+    "delivery"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
@@ -20,5 +26,6 @@
         "defaultPrompt": "Who am I in Ordering?"
       }
     }
-  }
+  },
+  "skills": "./skills/"
 }

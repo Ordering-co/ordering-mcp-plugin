@@ -5,11 +5,13 @@ description: Use when the user asks about their Ordering project (orders, busine
 
 # Working with Ordering through MCP
 
-Ordering is a platform for restaurants and stores: online ordering, delivery,
+Ordering.co is a platform for restaurants and stores: online ordering, delivery,
 pickup, drivers and the back office of each business. Every customer of
 Ordering is a **project** (a tenant with its own data). The `ordering` MCP
 server is bound to one project and acts with the permissions of the person who
 created the MCP key.
+
+This skill does not register an MCP server or store credentials. Use the quickstart runbook for connection. Inspect the client’s effective MCP configuration for duplicate legacy plugin/project servers before claiming success; never remove unrelated MCPs or restart another session.
 
 ## Tools and the order to use them
 
@@ -50,13 +52,19 @@ every turn.
 Only these updates are available, and only with a key that has the `write`
 scope:
 
-- a menu, a category, a product, an extra, an option or a suboption: enable or
-  disable it, snooze it, and change its name, description, price or rank;
-- a business: open or close it, change its schedule and its contact data;
-- an order: change its status (accept, ready, cancel…), with a reason or a
-  comment;
-- an offer or a coupon: enable or disable it, change its amounts, dates and
-  limits.
+- menus: enable/disable, name, schedule and snooze;
+- categories and extras: enable/disable, name, description, rank and snooze;
+- products: enable/disable, name, description, price, offer price, offer switch, rank and snooze;
+- options: enable/disable, name, minimum/maximum choices, rank and snooze;
+- suboptions: enable/disable, name, description, price, rank and snooze;
+- businesses: enable/disable, schedule, snooze, selected descriptive/contact fields;
+- orders: status, rejection reason/reasons, comment and preparation time;
+- offers/coupons: enable/disable, supported amounts, dates and limits.
+
+The live `describe_operation` result is authoritative for each field. Do not
+assume that every entity supports prices, descriptions or snooze just because
+another one does. A request to close “until tomorrow” needs the business timezone
+and a supported temporary field; disabling it is not an automatic next-day reopening.
 
 Rules:
 
@@ -173,8 +181,8 @@ times, check the business `timezone`.
   the user's role does not allow it.
 - An expired key says so. If the user set things up with the Ordering
   developer quickstart (`~/ordering-dev-quickstart` exists), renew it with
-  `~/ordering-dev-quickstart/ordering login`: they sign in in the browser and
-  the new key is saved without copying it. Otherwise, tell them to create a
+  `~/ordering-dev-quickstart/ordering login --install`: they sign in in the browser and
+  the new key is saved without copying it. Collect the final terminal result, retry `install` if registration alone failed, then reload the client and call `whoami` again. Browser delivery and configuration read-back do not prove a client-side authenticated call. Otherwise, tell them to create a
   new one in the Ordering Dashboard, on the MCP page. Never ask for the key in
   the chat.
 
@@ -182,9 +190,7 @@ times, check the business `timezone`.
 
 If an operation isn't available through the MCP (`search_operations` doesn't
 find it, it's excluded from this server, or it's a write the MCP doesn't
-allow), check whether the user connected the REST API through the developer
-quickstart: `grep -c '^ORDERING_API_KEY=.\+' ~/ordering-dev-quickstart/.env`
-returns `1` if a key is set. Never read or print that file.
+allow), run `~/ordering-dev-quickstart/ordering doctor` if that checkout exists. Its REST section reports whether a credential is available and accepted. Never read `.env` (including with grep), print keys or infer a live connection from file presence. If no API key is configured, explain the optional connection below.
 
 If it's connected, use `~/ordering-dev-quickstart/ordering api METHOD PATH
 [JSON]`. Find the right operation first, never guess an endpoint: run
@@ -201,8 +207,8 @@ If it's connected, use `~/ordering-dev-quickstart/ordering api METHOD PATH
   key or the `.env` file.
 
 If the REST API isn't connected, explain that the user can connect it by
-running `~/ordering-dev-quickstart/ordering reset` and choosing "Also give my
+running `~/ordering-dev-quickstart/ordering login --install` and choosing "Also give my
 agent the REST API" on the page it opens, or by doing the equivalent in the
 Dashboard. Mention that REST API keys currently have full access to the
 project and don't expire, so the user should treat connecting one as a
-bigger step than an MCP key.
+bigger step than an MCP key. MCP read does not restrict REST; the checkbox is on by default. Unchecking avoids a new key but preserves an existing same-project REST key with a warning. Revoke REST and MCP keys separately in Dashboard.
