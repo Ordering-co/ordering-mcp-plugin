@@ -2,21 +2,21 @@
 
 This plugin adds a shared skill: how to discover Ordering operations, interpret orders and permissions, minimize personal data and confirm permitted changes. The marketplace is `ordering-dev`; the plugin ID is `ordering@ordering-dev`, version 0.5.0.
 
-The **MCP server** authorizes a selected API catalog for one project. The **[quickstart](https://github.com/Finitless-com/ordering-dev-quickstart)** signs you in, manages local credentials and registers a launcher in detected clients. This **plugin** adds platform knowledge. Version 0.5.0 is skill-only in both clients: it requests no key and registers no second server. Installing it alone does not connect Ordering.
+The **MCP server** authorizes a selected API catalog for one project. The **[quickstart](https://github.com/Ordering-co/ordering-dev-quickstart)** signs you in, manages local credentials and registers a launcher in detected clients. This **plugin** adds platform knowledge. Version 0.5.0 is skill-only in both clients: it requests no key and registers no second server. Installing it alone does not connect Ordering.
 
 ## 1. Connect MCP first
 
 Paste into your terminal AI agent:
 
 ```text
-Connect me to Ordering.co: clone https://github.com/Finitless-com/ordering-dev-quickstart to ~/ordering-dev-quickstart (or pull it if I already have it), then read its SETUP.md and follow it step by step.
+Connect me to Ordering.co: clone https://github.com/Ordering-co/ordering-dev-quickstart to ~/ordering-dev-quickstart (or pull it if I already have it), then read its SETUP.md and follow it step by step.
 ```
 
 The installer requires Node.js 22+ and npm on macOS/Linux, including clients inside WSL. It configures the machine running the terminal. You need your own eligible Ordering account (administrator or business manager) and MCP enabled for your project. Wait for the terminal’s final result, reload the client and observe `whoami` in it. The browser only confirms delivery; `clients` only checks registration. If login succeeded but installation failed, retry `~/ordering-dev-quickstart/ordering install`.
 
 MCP defaults to read. The browser pairing defaults to 30 days; manual MCP keys default to 7, currently up to 365. REST is a **separate** option checked by default, with broad user permissions and no expiration: uncheck it for MCP-only access. MCP read does not restrict REST. A same-project REST key already saved by quickstart is retained with a warning.
 
-Repository access is required while the quickstart and this marketplace are private. If GitHub denies access, use the [manual MCP guide](https://docs.ordering.co/docs/developers/mcp/) or request access; Ordering login does not grant GitHub membership.
+This quickstart and marketplace are public in the Ordering-co organization. You can clone and install them without GitHub membership. Access to Ordering project data still requires your own eligible account and consent.
 
 ## 2. Add the optional skill
 
@@ -25,14 +25,14 @@ Repository access is required while the quickstart and this marketplace are priv
 In a Claude Code session:
 
 ```text
-/plugin marketplace add Finitless-com/ordering-mcp-plugin
+/plugin marketplace add Ordering-co/ordering-mcp-plugin
 /plugin install ordering@ordering-dev
 ```
 
 CLI equivalent:
 
 ```bash
-claude plugin marketplace add Finitless-com/ordering-mcp-plugin
+claude plugin marketplace add Ordering-co/ordering-mcp-plugin
 claude plugin install ordering@ordering-dev --scope user
 ```
 
@@ -43,7 +43,7 @@ Update with `/plugin marketplace update ordering-dev`, then `/plugin update orde
 ### Codex
 
 ```bash
-codex plugin marketplace add Finitless-com/ordering-mcp-plugin
+codex plugin marketplace add Ordering-co/ordering-mcp-plugin
 codex plugin add ordering@ordering-dev
 ```
 
@@ -79,7 +79,7 @@ For an operation outside MCP, the skill uses the optional quickstart REST helper
 | 404 | Confirm project URL and server availability |
 | Operation/field rejected | Discover/describe the selected catalog and check scope; do not broaden permissions |
 
-Use the [complete MCP guide](https://docs.ordering.co/docs/developers/mcp/) and [quickstart troubleshooting](https://github.com/Finitless-com/ordering-dev-quickstart/blob/main/docs/troubleshooting.md). Share client/version and a sanitized error, not keys or customer responses. For vulnerabilities see [SECURITY.md](SECURITY.md).
+Use the [complete MCP guide](https://docs.ordering.co/docs/developers/mcp/) and [quickstart troubleshooting](https://github.com/Ordering-co/ordering-dev-quickstart/blob/main/docs/troubleshooting.md). Share client/version and a sanitized error, not keys or customer responses. For vulnerabilities see [SECURITY.md](SECURITY.md).
 
 ## Layout and validation
 
@@ -95,3 +95,7 @@ plugins/ordering/skills/ordering/SKILL.md        Shared platform skill
 Run `claude plugin validate .`, `claude plugin validate plugins/ordering`, and `node scripts/validate.mjs`. Native installation and update must be checked in isolated client profiles; manifest validity alone does not prove tools or live account access.
 
 Client references: [Claude plugins](https://code.claude.com/docs/en/plugins), [Claude MCP scopes](https://code.claude.com/docs/en/mcp), [OpenAI plugin packaging](https://developers.openai.com/plugins/build/plugins).
+
+## License
+
+[MIT](LICENSE), copyright 2026 Ordering, Inc. Historical contributor attribution is retained.
