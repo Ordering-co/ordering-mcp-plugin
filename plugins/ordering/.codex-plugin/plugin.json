@@ -1,0 +1,14 @@
+{
+  "name": "ordering",
+  "version": "0.5.0",
+  "description": "Ordering.co platform skill. Connect MCP separately with ordering-dev-quickstart; this plugin never requests credentials or registers a second server.",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ordering",
+    "shortDescription": "Read your Ordering project through its MCP server.",
+    "developerName": "Ordering",
+    "category": "Productivity",
+    "websiteURL": "https://www.ordering.co",
+    "defaultPrompt": "Who am I in Ordering?"
+  }
+}

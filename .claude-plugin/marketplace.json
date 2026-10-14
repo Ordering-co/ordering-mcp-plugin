@@ -9,7 +9,7 @@
     {
       "name": "ordering",
       "source": "./plugins/ordering",
-      "description": "Connect Claude Code to your Ordering project through the Ordering MCP server, with a skill that knows the platform."
+      "description": "Ordering.co platform skill for the MCP connection installed separately by quickstart."
     }
   ]
 }

@@ -1,36 +1,18 @@
 {
   "name": "ordering",
   "displayName": "Ordering",
-  "version": "0.4.0",
-  "description": "Read your Ordering project (orders, businesses, menus, users, reports) from Claude Code through the Ordering MCP server.",
+  "version": "0.5.0",
+  "description": "Use the Ordering.co skill with the MCP connection registered separately by ordering-dev-quickstart.",
   "author": {
     "name": "Ordering",
     "url": "https://www.ordering.co"
   },
   "homepage": "https://www.ordering.co",
-  "keywords": ["ordering", "mcp", "orders", "restaurants", "delivery"],
-  "userConfig": {
-    "project": {
-      "type": "string",
-      "title": "Ordering project code",
-      "description": "The code of your Ordering project, as it appears in your Dashboard and API URLs (for example: myrestaurant).",
-      "required": true
-    },
-    "mcp_key": {
-      "type": "string",
-      "title": "Ordering MCP key",
-      "description": "An MCP key (ord_mcp_...) created in your Ordering Dashboard, MCP page. Stored in your system keychain.",
-      "sensitive": true,
-      "required": true
-    }
-  },
-  "mcpServers": {
-    "ordering": {
-      "type": "http",
-      "url": "https://api.ordering.co/mcp/${user_config.project}",
-      "headers": {
-        "Authorization": "Bearer ${user_config.mcp_key}"
-      }
-    }
-  }
+  "keywords": [
+    "ordering",
+    "mcp",
+    "orders",
+    "restaurants",
+    "delivery"
+  ]
 }
